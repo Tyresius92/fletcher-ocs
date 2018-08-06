@@ -31,7 +31,7 @@ for line in lines:
         broken = line.split(sep=',')
         email = broken[-1].replace('\n', '')
 
-        match = re.match(r'^[_A-Za-z0-9]+(\.[_A-Za-z0-9]+)*@[A-Za-z0-9]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,4})$', email).group
+        match = re.match(r'^[-_A-Za-z0-9]+(\.[-_A-Za-z0-9]+)*@[-A-Za-z0-9]+(\.[-A-Za-z0-9]+)*(\.[A-Za-z]{2,4})$', email).group
 
         if match == None:
             print("bad syntax: " + email)
@@ -58,7 +58,7 @@ for line in lines:
                 output.write(line.replace('\n', '') + ",Valid\n")
             else:
                 print("invalid: " + email)
-                output.write(line.replace('\n', '') + ",Invalid,mxRecord returned value other than 250\n")
+                output.write(line.replace('\n', '') + ",Invalid,mxRecord returned value " + str(code) + "\n")
     except Exception as error:
         print("error: " + email)
         print(str(error))
